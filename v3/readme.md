@@ -3,7 +3,7 @@
 ## Yükleme
 
 
-1. İndirilen zip dosyasının içindeki dosyalar olduğu gibi Opencart projesinin bulunduğu klasöre kopyalanır.
+1. İndirilen zip dosyasının içindeki dosyalar(v3 altındaki dosyalar) olduğu gibi Opencart projesinin bulunduğu klasöre kopyalanır.
 2. Opencart Admin Panelinden eklentiler sekmesine tıklanır gelen Seçenekler menüsünde Ödemeler seçilir.
 3. KuveytTürk Sanal Pos ödeme methodu bulunarak yüklenir ve düzenleye tıklanır.
 4. KuveytTürk Sanal Pos Yönetim ekranında Aktif/Pasif seçeneği açık hale getirilir.
