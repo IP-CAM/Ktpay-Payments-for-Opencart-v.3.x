@@ -6,7 +6,7 @@ class KTPayConfig{
     {
         $installments = array();
         for ($i = 1; $i <= count($installment_array); $i++) {
-            $installments[$i]['value'] = isset($postedData[$i]['value']) ? ((float) $postedData[$i]['value']) : 0.0;
+            $installments[$i]['rate'] = isset($postedData[$i]['rate']) ? ((float) $postedData[$i]['rate']) : 0.0;
             $installments[$i]['active'] = isset($postedData[$i]['active']) ? ((int) $postedData[$i]['active']) : 0;
         }
 
@@ -73,8 +73,8 @@ class KTPayConfig{
             $installment_array[$i] = array(
                 'count' => $rates[$i]['count'],
                 'active' => isset($rates[$i]['active']) ? $rates[$i]['active'] : 0,
-                'total' => number_format((((100 + (isset($rates[$i]['value']) ? $rates[$i]['value'] : 0)) * $price) / 100), 2, '.', ''),
-                'monthly' => number_format((((100 + (isset($rates[$i]['value']) ? $rates[$i]['value'] : 0)) * $price) / 100) / $i, 2, '.', ''),
+                'total' => number_format((((100 + (isset($rates[$i]['rate']) ? $rates[$i]['rate'] : 0)) * $price) / 100), 2, '.', ''),
+                'monthly' => number_format((((100 + (isset($rates[$i]['rate']) ? $rates[$i]['rate'] : 0)) * $price) / 100) / $i, 2, '.', ''),
             );
         }
         return $installment_array;
@@ -82,7 +82,7 @@ class KTPayConfig{
 
     public static function calculate_total_price($price, $rates, $installment)
     {
-        return number_format((((100 + (isset($rates[$installment]['value']) ? $rates[$installment]['value'] : 0)) * $price) / 100), 2, '.', '');
+        return number_format((((100 + (isset($rates[$installment]['rate']) ? $rates[$installment]['rate'] : 0)) * $price) / 100), 2, '.', '');
     }
 
     public static function get_currency_code($currency)
