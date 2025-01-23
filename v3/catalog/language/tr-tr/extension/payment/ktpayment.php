@@ -9,4 +9,5 @@ $_['card_expire_date_placeholder'] = 'AA/YY';
 $_['installment_count_text'] = 'Taksit Adedi';
 $_['pay'] = 'Öde';
 $_['installment'] = 'Taksit';
+$_['direct_pay'] = 'Tek Çekim';
 $_['text_title'] = 'Kredi Kartı (KuveytTürk Sanalpos)';
