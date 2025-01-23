@@ -9,4 +9,5 @@ $_['card_expire_date_placeholder'] = 'MM/YY';
 $_['installment_count_text'] = 'Installment Count';
 $_['pay'] = 'Pay';
 $_['installment'] = 'Installment';
+$_['direct_pay'] = 'Tek Çekim';
 $_['text_title'] = 'Credit Card (KuveytTürk VPos)';
