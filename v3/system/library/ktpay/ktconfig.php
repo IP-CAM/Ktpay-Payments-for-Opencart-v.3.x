@@ -2,17 +2,6 @@
 
 class KTPayConfig{
 
-    public static function set_rates_from_post($postedData, $installment_array)
-    {
-        $installments = array();
-        for ($i = 1; $i <= count($installment_array); $i++) {
-            $installments[$i]['rate'] = isset($postedData[$i]['rate']) ? ((float) $postedData[$i]['rate']) : 0.0;
-            $installments[$i]['active'] = isset($postedData[$i]['active']) ? ((int) $postedData[$i]['active']) : 0;
-        }
-
-        return $installments;
-    }
-
     public static function init_rates($installment_array)
     {
         $installments = array();
