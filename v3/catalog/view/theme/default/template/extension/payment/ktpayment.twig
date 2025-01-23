@@ -106,7 +106,13 @@
                                                     <input type="radio" id="{{ rates[i]['count'] }}" name="installment"
                                                         value="{{ rates[i]['count'] }}" onclick="clickInstallment()">
                                                     <label
-                                                        id="installmentLabel_{{ rates[i]['count'] }}">{{ rates[i]['count'] }} {{installment}}</label>
+                                                        id="installmentLabel_{{ rates[i]['count'] }}">
+                                                        {% if rates[i]['count']==1 %}
+                                                            {{direct_pay}}
+                                                        {%else%}
+                                                            {{ rates[i]['count'] }} {{installment}}
+                                                        {%endif%}                                                        
+                                                    </label>
                                                 </div>
                                             </th>
                                             <th>
