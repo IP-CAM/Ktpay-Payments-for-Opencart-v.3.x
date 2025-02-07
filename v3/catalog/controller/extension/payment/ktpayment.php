@@ -266,7 +266,7 @@ class ControllerExtensionPaymentKTPayment extends Controller{
             if($response['status']=="success")
             {  
                 $orderMessage = 'Payment ID: ' . $postParams['Result_MerchantOrderId'];
-                $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_ktpayment_order_status_id'), $response['message'], false);
+                $this->model_checkout_order->addOrderHistory($orderid, $this->config->get('payment_ktpayment_order_status_id'), $response['message'], false);
                 $this->response->redirect($this->url->link('checkout/success', '', $server_conn_slug));
             }
             else
@@ -274,14 +274,14 @@ class ControllerExtensionPaymentKTPayment extends Controller{
                 $message = (string)$response['message'];
                 $message = !empty($message) ? $message : 'İşlem sırasında beklenmedik bir hata oluştu!';
                 $this->session->data['error'] = $message;
-                $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
+                $this->model_checkout_order->addOrderHistory($orderid, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
                 $this->response->redirect($this->url->link('checkout/checkout', '', $server_conn_slug));
             }
         } catch (\Throwable $th) {
             $message = (string)$th->getMessage();
             $message = !empty($message) ? $message : 'İşlem sırasında beklenmedik bir hata oluştu';
             $this->session->data['error'] = $message;
-            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
+            $this->model_checkout_order->addOrderHistory($orderid, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
             $this->response->redirect($this->url->link('checkout/checkout', '', $server_conn_slug));
         }
     }
