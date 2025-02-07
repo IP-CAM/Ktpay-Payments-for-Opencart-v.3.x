@@ -232,8 +232,8 @@ class ControllerExtensionPaymentKTPayment extends Controller{
         $this->load->model('extension/payment/ktpayment');
         $this->load->model('checkout/order');
         $postParams = $_POST;
-        $order_id=isset($postParams['Result_MerchantOrderId']) ? $postParams['Result_MerchantOrderId'] : "";
-        $orderid=substr($order_id,3,strlen($order_id));
+        $merchant_order_id=isset($postParams['Result_MerchantOrderId']) ? $postParams['Result_MerchantOrderId'] : "";
+        $orderid=substr($merchant_order_id,3,strlen($merchant_order_id));
 
         $order_info = $this->model_checkout_order->getOrder($orderid);
         $merchant_id=$this->config->get('payment_ktpayment_merchantid');
@@ -252,7 +252,7 @@ class ControllerExtensionPaymentKTPayment extends Controller{
             'customer_id' =>$customer_id,
             'amount' =>$total_amount,
             'order_id' =>isset( $postParams['Result_OrderId']) ? $postParams['Result_OrderId'] : "",
-            'merchant_order_id' =>isset( $postParams['Result_MerchantOrderId']) ? $postParams['Result_MerchantOrderId'] : "",
+            'merchant_order_id' => $merchant_order_id,
             'api_user_name' =>$api_username,
             'api_user_password' =>$api_password,
             'response_message' => isset( $postParams['ResponseMessage']) ? $postParams['ResponseMessage'] : "",
