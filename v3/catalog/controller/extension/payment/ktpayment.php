@@ -236,7 +236,6 @@ class ControllerExtensionPaymentKTPayment extends Controller{
         $orderid=substr($order_id,3,strlen($order_id));
 
         $order_info = $this->model_checkout_order->getOrder($orderid);
-        $environment=$this->config->get('payment_ktpayment_environment');
         $merchant_id=$this->config->get('payment_ktpayment_merchantid');
         $customer_id=$this->config->get('payment_ktpayment_customerid');
         $api_username=$this->config->get('payment_ktpayment_username');
@@ -257,6 +256,7 @@ class ControllerExtensionPaymentKTPayment extends Controller{
             'api_user_name' =>$api_username,
             'api_user_password' =>$api_password,
             'response_message' => isset( $postParams['ResponseMessage']) ? $postParams['ResponseMessage'] : "",
+            'environment' => $this->config->get('payment_ktpayment_environment')
         );
 
         $action = isset($_GET['action']) ? $_GET['action'] : "fail";
@@ -273,13 +273,15 @@ class ControllerExtensionPaymentKTPayment extends Controller{
             {
                 $message = (string)$response['message'];
                 $message = !empty($message) ? $message : 'İşlem sırasında beklenmedik bir hata oluştu!';
-                $this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
+                $this->session->data['error'] = $message;
+                $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
                 $this->response->redirect($this->url->link('checkout/checkout', '', $server_conn_slug));
             }
         } catch (\Throwable $th) {
             $message = (string)$th->getMessage();
             $message = !empty($message) ? $message : 'İşlem sırasında beklenmedik bir hata oluştu';
-            $this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
+            $this->session->data['error'] = $message;
+            $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_ktpayment_cancel_order_status_id'), $message, false);
             $this->response->redirect($this->url->link('checkout/checkout', '', $server_conn_slug));
         }
     }
