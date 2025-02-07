@@ -81,7 +81,8 @@ class KTPay
         $this->merchant_order_id = $params['merchant_order_id'];
         $this->order_id = $params['order_id'];
         $this->md = $params['md'];
-        
+        $this->environment = $params['environment'];
+
         $amount=$params['amount']*100;
         $amount=str_replace(',','',$amount);
         $amount=str_replace('.','',$amount);
@@ -272,7 +273,7 @@ class KTPay
 
     private function provision($params)
     {
-        $this->set_provision_params($params);      
+        $this->set_provision_params($params);    
         $params=array(
             'data'=>$this->init_provision_request_body(),
             'url'=> $this->environment=='TEST' ? $this->provision_test_url : $this->provision_url,
